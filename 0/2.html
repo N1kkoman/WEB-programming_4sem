@@ -1,0 +1,21 @@
+<!-- Вариант 9. Создайте форму, позволяющую выбирать несколько из данных значений в поле любимое блюдо: 
+    стейк, шашлык, гриль и пр. Используйте теги <label> и <input>. -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Выбор любимого блюда</title>
+</head>
+<body>
+    <h1>Выберите ваше любимое блюдо</h1>
+    <form>
+        <fieldset>
+            <legend>Выберите любимое блюдо:</legend>
+            <label><input type="checkbox" name="dish" value="steak"> Пицца</label><br>
+            <label><input type="checkbox" name="dish" value="shashlik"> Шашлык</label><br>
+            <label><input type="checkbox" name="dish" value="grill"> Котлеты</label><br>
+            <!-- Добавлены теги <label> для каждого варианта блюда и использованы чекбоксы (input type="checkbox") для множественного выбора -->
+        </fieldset>
+    </form>
+</body>
+</html>

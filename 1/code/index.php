@@ -136,3 +136,59 @@ foreach ($numbers as $num) {
     }
 }
 echo "Количество элементов для суммы больше 10: $count<br>";
+
+
+echo "<br>----------------<br>";
+// 15
+function printStringReturnNumber($str) {
+    echo $str. "<br>";
+    return intval($str); // любое числовое значение
+}
+
+$my_num = printStringReturnNumber("5");
+echo $my_num . "<br>";
+
+
+echo "<br>----------------<br>";
+// 16
+function increaseEnthusiasm($str) {
+    return $str . "!";
+}
+
+function repeatThreeTimes($str) {
+    return $str . $str . $str;
+}
+
+$string = "Hello";
+echo increaseEnthusiasm($string) . "<br>";
+echo repeatThreeTimes($string) . "<br>";
+
+echo increaseEnthusiasm(repeatThreeTimes($string)) . "<br>";
+
+function cut($str, $length = 10) {
+    return substr($str, 0, $length);
+}
+
+echo cut("This is a long string", 5) . "<br>";
+
+function printArrayElementsRecursively($array, $index = 0) {
+    if ($index < count($array)) {
+        echo $array[$index] . "<br>";
+        printArrayElementsRecursively($array, $index + 1);
+    }
+}
+
+$array = [1, 2, 3, 4, 5];
+printArrayElementsRecursively($array);
+
+echo "<br>";
+function sumDigits($number) {
+    $sum = array_sum(str_split($number));
+    if ($sum > 9) {
+        return sumDigits($sum);
+    } else {
+        return $sum;
+    }
+}
+
+echo sumDigits(803) . "<br>";

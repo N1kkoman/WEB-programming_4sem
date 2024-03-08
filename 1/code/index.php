@@ -299,3 +299,42 @@ if (count($arr) == 3) {
 }
 
 echo "<br>";
+
+
+echo "<br>----------------<br>";
+// 19
+for ($i = 1; $i <= 20; $i++) {
+    echo str_repeat('x', $i) . "<br>";
+}
+
+
+echo "<br>----------------<br>";
+// 20
+$array = [1, 2, 3, 4, 5];
+$average = array_sum($array) / count($array);
+echo "Среднее арифметическое: $average<br>";
+
+
+$sum = (1 + 100) * 100 / 2;
+echo "Сумма чисел от 1 до 100: $sum<br>";
+
+
+$array = [4, 9, 16];
+$squareRoots = array_map('sqrt', $array);
+print_r($squareRoots);
+echo "<br>";
+
+
+$letters = range('a', 'z');
+$numbers = range(1, 26);
+$alphabetArray = array_combine($letters, $numbers);
+print_r($alphabetArray);
+echo "<br>";
+
+
+$string = '1234567890';
+$numbers = str_split($string, 2);
+$sum = array_sum($numbers);
+echo $sum . "<br>";
+
+echo "<br>----------------<br>";

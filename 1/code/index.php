@@ -254,3 +254,48 @@ echo count($arr) . "<br>";
 echo end($arr) . "<br>";
 prev($arr);
 echo current($arr) . "<br>";
+
+
+echo "<br>----------------<br>";
+// 18
+function checkSum($num1, $num2) {
+    return ($num1 + $num2 > 10) ? true : false;
+}
+
+echo checkSum(5, 6) ? 'true' : 'false';
+echo "<br>";
+
+
+function checkEquality($num1, $num2) {
+    return ($num1 == $num2) ? true : false;
+}
+
+echo checkEquality(5, 5) ? 'true' : 'false';
+echo "<br>";
+
+
+$test = 0;
+echo ($test == 0) ? 'верно' : '';
+
+echo "<br>";
+
+$age = 54;
+if ($age < 10 || $age > 99) {
+    echo "Число вне диапазона.";
+} else {
+    $sum = array_sum(str_split($age));
+    if ($sum <= 9) {
+        echo "Сумма цифр однозначна.";
+    } else {
+        echo "Сумма цифр двузначна.";
+    }
+}
+
+echo "<br>";
+
+$arr = [1, 2, 3];
+if (count($arr) == 3) {
+    echo array_sum($arr);
+}
+
+echo "<br>";

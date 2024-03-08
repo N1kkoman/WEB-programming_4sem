@@ -192,3 +192,65 @@ function sumDigits($number) {
 }
 
 echo sumDigits(803) . "<br>";
+
+
+echo "<br>----------------<br>";
+// 17
+$array = [];
+for ($i = 1; $i <= 5; $i++) {
+    $array[] = str_repeat('x', $i);
+}
+var_dump($array);
+
+echo "<br>";
+function arrayFill($value, $count)
+{
+    return array_fill(0, $count, $value);
+}
+
+$resultArray = arrayFill('x', 5);
+var_dump($resultArray);
+
+echo "<br>";
+
+$arr2D = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+$sum = 0;
+foreach ($arr2D as $i) {
+    foreach ($i as $j) {
+        $sum += $j;
+    }
+}
+echo $sum. "<br>";
+
+$counter = 1;
+$multiDimArray = [];
+for ($i = 0; $i < 3; $i++) {
+    $row = [];
+    for ($j = 0; $j < 3; $j++) {
+        $row[] = $counter++;
+    }
+    $multiDimArray[] = $row;
+}
+print_r($multiDimArray);
+echo "<br>";
+
+$userArray = [2, 5, 3, 9];
+$result = ($userArray[0] * $userArray[1]) + ($userArray[2] * $userArray[3]);
+echo $result . "<br>";
+
+
+$user = ['name' => 'Nicole', 'surname' => 'Tala', 'patronymic' => 'Valdez'];
+echo $user['surname'] . ' ' . $user['name'] . ' ' . $user['patronymic'] . "<br>";
+
+
+$date = ['year' => date('Y'), 'month' => date('m'), 'day' => date('d')];
+echo $date['year'] . '-' . $date['month'] . '-' . $date['day'] . "<br>";
+
+
+$arr = ['a', 'b', 'c', 'd', 'e'];
+echo count($arr) . "<br>";
+
+
+echo end($arr) . "<br>";
+prev($arr);
+echo current($arr) . "<br>";

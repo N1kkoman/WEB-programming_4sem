@@ -1,24 +1,43 @@
 <?php
+
 function redirectToHome(): void
 {
     header('Location: /');
     exit();
 }
 
-if (false === isset($_POST['email'], $_POST['category'], $_POST['title'], $_POST['description']))
+$URL_APP = "https://script.google.com/macros/s/AKfycbzwKOn9Jjfou7pTn6sUbFyMwmWai9HzmVe5pPHQOKkU3-jKaFLtNZ7h4nN9HQTFwl9-/exec";
+
+function is_filled(array $details): bool
 {
-    redirectToHome();
+    return !empty($details['title']) && !empty($details['email']) && !empty($details['category']) && !empty($details['description']);
 }
 
-$category = $_POST['category'];
-$title = $_POST['title'];
-$desc = $_POST['description']."\n".$_POST['email'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $title = $_POST['title'];
+    $email = $_POST['email'];
+    $category = $_POST['category'];
+    $description = $_POST['description'];
 
-$filePath = "categories/{$category}/{$title}.txt";
+    $details = [
+        'title' => $title,
+        'email' => $email,
+        'category' => $category,
+        'description' => $description,
+    ];
 
-if (false === file_put_contents($filePath, $desc))
-{
-    throw new Exception("Something went wrong.");
+    if (!is_filled($details)) {
+        exit('Поля формы не заполнены');
+    }
+
+    $formBody = http_build_query($details, '', '&');
+
+    $response = json_decode(file_get_contents($URL_APP, false, stream_context_create([
+        'http' => [
+            'method'  => 'POST',
+            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+            'content' => $formBody,
+        ],
+    ])), true);
 }
-chmod($filePath, 0777);
 redirectToHome();

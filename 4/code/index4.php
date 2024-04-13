@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>lab 3: p3</title>
+    <title>lab 4</title>
 </head>
 <body>
 <div id="form">
@@ -14,19 +14,13 @@
         <input type="email" name="email" required>
 
         <label for="category">Category</label>
-        <?php
-        $categories = scandir('categories');
-
-        echo '<select name="category" required>';
-
-        foreach ($categories as $category) {
-            if (is_dir("categories/$category") && $category != '.' && $category != '..') {
-                echo "<option value='$category'>$category</option>";
-            }
-        }
-
-        echo '</select>';
-        ?>
+        <select name="category" required>
+            <option value="electronics">Electronics</option>
+            <option value="clothing">Clothing</option>
+            <option value="books">Books</option>
+            <option value="furniture">Furniture</option>
+            <option value="other">Other</option>
+        </select>
 
         <label for="title">Title</label>
         <input type="text" name="title" required>
@@ -42,46 +36,34 @@
 <div id="table">
     <table>
         <thead>
-        <th>Category</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Email</th>
+        <tr>
+            <th>Category</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Email</th>
+        </tr>
         </thead>
         <tbody>
         <?php
-        // Обрабатываем объявления
-        $categories = scandir('categories');
-        foreach ($categories as $category) {
-            if (is_dir("categories/$category") && $category != '.' && $category != '..') {
-                $subcategories = scandir("categories/$category");
-                // Идем по объявлениям
-                foreach ($subcategories as $subcategory) {
-                    if ($subcategory != '.' && $subcategory != '..') {
-                        $filePath = "categories/$category/$subcategory";
-                        $fp = fopen($filePath, 'r');
-                        $desc = "";
-                        $email = "";
-                        while ($line = fgets($fp)) {
-                            if (filter_var($line, FILTER_VALIDATE_EMAIL)) {
-                                $email = $line;
-                            } else {
-                                $desc .= $line;
-                            }
-                        }
-                        fclose($fp);
+        // Чтение данных из Google Sheets
+        $id = '1lgdbNrM_GBucnOlqAEZPZ78QqpyA-MVxMiXKZYL_eso';
+        $gid = 0;
+        $csv = file_get_contents('https://docs.google.com/spreadsheets/d/' . $id . '/export?format=csv&gid=' . $gid);
+        $csv = explode("\r\n", $csv);
+        $array = array_map('str_getcsv', $csv);
 
-                        // Формируем строку объявления
-                        echo '<tr>';
-                        echo "<td>$category</td>";
-                        // удаляем последние 4 символа (.txt)
-                        echo "<td>".substr($subcategory, 0, strlen($subcategory) - 4)."</td>";
-                        echo "<td>$desc</td>";
-                        echo "<td>$email</td>";
-                        echo '</tr>';
-                    }
-                }
-            }
+        // Вывод объявлений на сайте
+        $html = '';
+        foreach ($array as $row) {
+            $html .= '<tr>';
+            $html .= '<td>' . $row[0] . '</td>';
+            $html .= '<td>' . $row[1] . '</td>';
+            $html .= '<td>' . $row[2] . '</td>';
+            $html .= '<td>' . $row[3] . '</td>';
+            $html .= '</tr>';
         }
+
+        echo $html;
         ?>
         </tbody>
     </table>
